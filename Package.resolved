@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "swift-standard-library",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/s-brenner/swift-standard-library",
+      "state" : {
+        "revision" : "d037aacdbd53edd7d023734c351931a47251e4ae",
+        "version" : "0.0.0"
+      }
+    }
+  ],
+  "version" : 2
+}
