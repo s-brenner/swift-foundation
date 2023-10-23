@@ -3,6 +3,7 @@
 extension RelativeDateTimeFormatter {
     
     /// Return the local thread shared relative date time formatter for a given dateTimeStyle, formattingContext, unitsStyle, calendar and locale.
+    /// - Author: Scott Brenner | SBFoundation
     /// - Parameters:
     ///   - dateTimeStyle: The date time style of the returned formatter.
     ///   - formattingContext: The formatting context of the returned formatter.

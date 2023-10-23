@@ -19,4 +19,15 @@ extension Date {
         return dates
     }
 }
+
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+extension Date.RelativeFormatStyle {
+    
+    ///- Author: Scott Brenner | SBFoundation
+    public func capitalizationContext(_ capitalizationContext: FormatStyleCapitalizationContext) -> Self {
+        var style = self
+        style.capitalizationContext = capitalizationContext
+        return style
+    }
+}
 #endif
