@@ -1,20 +1,27 @@
-/// Describes a mathematical relationship between three `Dimension` types
-/// where `Factor1` * `Factor2` = `Product`.
+#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
+/// Describes a mathematical relationship between three `Dimension` types where `Factor1` * `Factor2` = `Product`.
 ///
 /// Example:
 /// `UnitSpeed` * `UnitDuration` = `UnitLength
+///- Author: Scott Brenner | SBFoundation
 public protocol UnitProduct {
     
+    ///- Author: Scott Brenner | SBFoundation
     associatedtype Factor1: Dimension
     
+    ///- Author: Scott Brenner | SBFoundation
     associatedtype Factor2: Dimension
     
+    ///- Author: Scott Brenner | SBFoundation
     associatedtype Product: Dimension
     
+    ///- Author: Scott Brenner | SBFoundation
     typealias UnitMapping = (Factor1, Factor2, Product)
     
+    ///- Author: Scott Brenner | SBFoundation
     static func defaultUnitMapping() -> UnitMapping
     
+    ///- Author: Scott Brenner | SBFoundation
     static func preferredUnitMappings() -> [UnitMapping]
 }
 
@@ -45,7 +52,8 @@ extension UnitProduct {
 }
 
 /// UnitProduct.Product = Factor1 * Factor2
-public func * <UnitType>(lhs: Measurement<UnitType.Factor1>, rhs: Measurement<UnitType.Factor2>) -> Measurement<UnitType>
+///- Author: Scott Brenner | SBFoundation
+public func *<UnitType>(lhs: Measurement<UnitType.Factor1>, rhs: Measurement<UnitType.Factor2>) -> Measurement<UnitType>
 where UnitType: UnitProduct, UnitType == UnitType.Product {
     // Perform the calculation in the default unit mapping
     let (leftUnit, rightUnit, resultUnit) = UnitType.defaultUnitMapping()
@@ -57,13 +65,15 @@ where UnitType: UnitProduct, UnitType == UnitType.Product {
 }
 
 /// UnitProduct.Product = Factor2 * Factor1
-public func * <UnitType>(lhs: Measurement<UnitType.Factor2>, rhs: Measurement<UnitType.Factor1>) -> Measurement<UnitType>
+///- Author: Scott Brenner | SBFoundation
+public func *<UnitType>(lhs: Measurement<UnitType.Factor2>, rhs: Measurement<UnitType.Factor1>) -> Measurement<UnitType>
 where UnitType: UnitProduct, UnitType == UnitType.Product {
     rhs * lhs
 }
 
 /// UnitProduct / Factor2 = Factor1
-public func / <UnitType>(lhs: Measurement<UnitType>, rhs: Measurement<UnitType.Factor2>) -> Measurement<UnitType.Factor1>
+///- Author: Scott Brenner | SBFoundation
+public func /<UnitType>(lhs: Measurement<UnitType>, rhs: Measurement<UnitType.Factor2>) -> Measurement<UnitType.Factor1>
 where UnitType: UnitProduct, UnitType == UnitType.Product {
     // Perform the calculation in the default unit mapping
     let (resultUnit, rightUnit, leftUnit) = UnitType.defaultUnitMapping()
@@ -75,7 +85,8 @@ where UnitType: UnitProduct, UnitType == UnitType.Product {
 }
 
 /// UnitProduct / Factor1 = Factor2
-public func / <UnitType>(lhs: Measurement<UnitType>, rhs: Measurement<UnitType.Factor1>) -> Measurement<UnitType.Factor2>
+///- Author: Scott Brenner | SBFoundation
+public func /<UnitType>(lhs: Measurement<UnitType>, rhs: Measurement<UnitType.Factor1>) -> Measurement<UnitType.Factor2>
 where UnitType: UnitProduct, UnitType == UnitType.Product {
     // Perform the calculation in the default unit mapping
     let (rightUnit, resultUnit, leftUnit) = UnitType.defaultUnitMapping()
@@ -85,3 +96,4 @@ where UnitType: UnitProduct, UnitType == UnitType.Product {
     let (_, preferredUnit, _) = UnitType.unitMapping(product: lhs.unit, factor1: rhs.unit)
     return result.converted(to: preferredUnit)
 }
+#endif

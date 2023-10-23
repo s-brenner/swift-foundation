@@ -1,4 +1,4 @@
-#if os(iOS) || os(macOS) || os(watchOS)
+#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
 extension UserDefaults {
     
     /// Get and set objects using subscript.
@@ -27,11 +27,10 @@ extension UserDefaults {
 }
 #endif
 
-#if canImport(Combine)
+#if canImport(Combine) && (os(macOS) || os(iOS) || os(watchOS) || os(tvOS))
 import Combine
 
-#if os(iOS) || os(macOS) || os(watchOS)
-@available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6.0, *)
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension UserDefaults {
     
     /// Returns the codable object associated with the specified key.
@@ -56,5 +55,4 @@ extension UserDefaults {
         self[key] = try? encoder.encode(object)
     }
 }
-#endif
 #endif

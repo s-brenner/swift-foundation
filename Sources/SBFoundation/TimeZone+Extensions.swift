@@ -1,3 +1,4 @@
+#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
 extension TimeZone {
     
     public static let africaAbidjan = TimeZone(identifier: "Africa/Abidjan")!
@@ -1353,3 +1354,4 @@ extension TimeZone {
         }
     }
 }
+#endif

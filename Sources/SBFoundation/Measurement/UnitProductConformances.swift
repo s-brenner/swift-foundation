@@ -1,3 +1,4 @@
+#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
 extension UnitLength: UnitProduct {
     
     public typealias Factor1 = UnitSpeed
@@ -106,3 +107,4 @@ extension UnitElectricCharge: UnitProduct {
         (.amperes, .seconds, .coulombs)
     }
 }
+#endif

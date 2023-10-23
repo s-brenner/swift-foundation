@@ -1,10 +1,12 @@
-#if os(iOS) || os(macOS) || os(watchOS) || os(tvOS)
+#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
 extension Date {
     
+    ///- Author: Scott Brenner | SBFoundation
     public static func dates(spanning interval: DateInterval) -> [Date] {
         dates(from: interval.start, to: interval.end)
     }
     
+    ///- Author: Scott Brenner | SBFoundation
     public static func dates(from fromDate: Date, to toDate: Date) -> [Date] {
         var dates: [Date] = []
         var date = fromDate

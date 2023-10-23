@@ -1,5 +1,4 @@
-import Foundation
-
+#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
 extension NumberFormatter {
     
     /// Returns a string containing the formatted value of the provided integer.
@@ -10,3 +9,4 @@ extension NumberFormatter {
         string(from: NSNumber(integerLiteral: integer))
     }
 }
+#endif

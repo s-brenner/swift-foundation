@@ -1,7 +1,8 @@
-#if os(iOS) || os(macOS) || os(watchOS)
+#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
 extension DateComponents {
     
     /// Nanoseconds, seconds, minutes, hours, and days converted to seconds.
+    ///- Author: Scott Brenner | SBFoundation
     public var duration: TimeInterval {
         var timeInterval: TimeInterval = 0
         timeInterval += TimeInterval(nanosecond ?? 0) / 1_000_000_000
@@ -18,6 +19,7 @@ extension DateComponents {
     /// components[.day]
     /// // 5
     /// ````
+    ///- Author: Scott Brenner | SBFoundation
     /// - Important: This does not take into account any built-in errors, `Int.max` returned instead of `nil`.
     /// - Parameter component: Component to get.
     public subscript(component: Calendar.Component) -> Int? {
@@ -44,6 +46,7 @@ extension DateComponents {
     }
     
     /// Convert receiver to a string with the given configuration.
+    ///- Author: Scott Brenner | SBFoundation
     /// - Parameter configuration:A configuration for the formatter that will perform the transformation.
     public func toString(withConfiguration configuration: DateComponentsFormatter.Configuration = .dayHourMinute) -> String? {
         DateComponentsFormatter
@@ -54,7 +57,7 @@ extension DateComponents {
 
 extension DateComponents: Comparable {
     
-    public static func < (lhs: DateComponents, rhs: DateComponents) -> Bool {
+    public static func <(lhs: DateComponents, rhs: DateComponents) -> Bool {
         lhs.duration < rhs.duration
     }
 }

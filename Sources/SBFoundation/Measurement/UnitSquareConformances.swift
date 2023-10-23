@@ -1,3 +1,4 @@
+#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
 extension UnitArea: UnitSquare {
     
     public typealias Factor = UnitLength
@@ -23,3 +24,4 @@ extension UnitArea: UnitSquare {
         ]
     }
 }
+#endif

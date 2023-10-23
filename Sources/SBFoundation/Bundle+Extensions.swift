@@ -1,6 +1,7 @@
-#if os(iOS) || os(macOS) || os(watchOS)
+#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
 extension Bundle {
     
+    ///- Author: Scott Brenner | SBFoundation
     public func decode<T>(
         _ type: T.Type,
         from file: String,

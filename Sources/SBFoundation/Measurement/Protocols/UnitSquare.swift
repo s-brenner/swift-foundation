@@ -1,11 +1,17 @@
+#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
+///- Author: Scott Brenner | SBFoundation
 public protocol UnitSquare {
     
+    ///- Author: Scott Brenner | SBFoundation
     associatedtype Factor: Dimension
     
+    ///- Author: Scott Brenner | SBFoundation
     associatedtype Product: Dimension
     
+    ///- Author: Scott Brenner | SBFoundation
     static func defaultUnitMapping() -> (Factor, Factor, Product)
     
+    ///- Author: Scott Brenner | SBFoundation
     static func preferredUnitMappings() -> [(Factor, Factor, Product)]
 }
 
@@ -32,7 +38,8 @@ extension UnitSquare {
 }
 
 /// UnitSquare.Product = Factor * Factor
-public func * <UnitType>(lhs: Measurement<UnitType.Factor>, rhs: Measurement<UnitType.Factor>) -> Measurement<UnitType>
+///- Author: Scott Brenner | SBFoundation
+public func *<UnitType>(lhs: Measurement<UnitType.Factor>, rhs: Measurement<UnitType.Factor>) -> Measurement<UnitType>
 where UnitType: UnitSquare, UnitType.Product == UnitType {
     let (leftUnit, rightUnit, resultUnit) = UnitType.defaultUnitMapping()
     let value = lhs.converted(to: leftUnit).value * rhs.converted(to: rightUnit).value
@@ -42,7 +49,8 @@ where UnitType: UnitSquare, UnitType.Product == UnitType {
 }
 
 /// UnitSquare / Factor = Factor
-public func / <UnitType>(lhs: Measurement<UnitType>, rhs: Measurement<UnitType.Factor>) -> Measurement<UnitType.Factor>
+///- Author: Scott Brenner | SBFoundation
+public func /<UnitType>(lhs: Measurement<UnitType>, rhs: Measurement<UnitType.Factor>) -> Measurement<UnitType.Factor>
 where UnitType: UnitSquare, UnitType.Product == UnitType {
     let (resultUnit, rightUnit, leftUnit) = UnitType.defaultUnitMapping()
     let value = lhs.converted(to: leftUnit).value / rhs.converted(to: rightUnit).value
@@ -50,3 +58,4 @@ where UnitType: UnitSquare, UnitType.Product == UnitType {
     let (preferredUnit, _, _) = UnitType.unitMapping(product: lhs.unit, factor: rhs.unit)
     return result.converted(to: preferredUnit)
 }
+#endif

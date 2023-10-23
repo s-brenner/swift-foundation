@@ -1,3 +1,4 @@
+#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
 extension Locale {
     
     public static let afrikaansNamibia = Locale(identifier: "af_NA")
@@ -2196,3 +2197,4 @@ extension Locale {
         }
     }
 }
+#endif

@@ -1,4 +1,5 @@
-@available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6.0, *)
+#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension RelativeDateTimeFormatter {
     
     /// Return the local thread shared relative date time formatter for a given dateTimeStyle, formattingContext, unitsStyle, calendar and locale.
@@ -33,3 +34,4 @@ extension RelativeDateTimeFormatter {
         return formatter
     }
 }
+#endif

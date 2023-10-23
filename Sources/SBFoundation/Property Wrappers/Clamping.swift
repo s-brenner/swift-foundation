@@ -1,5 +1,7 @@
+#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
+///- Author: Scott Brenner | SBFoundation
 @propertyWrapper
-public struct Clamping<Value: Comparable> {
+public struct Clamping<Value> where Value: Comparable {
     
     var value: Value
     
@@ -15,3 +17,4 @@ public struct Clamping<Value: Comparable> {
         self.range = range
     }
 }
+#endif

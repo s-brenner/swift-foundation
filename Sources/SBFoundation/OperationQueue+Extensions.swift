@@ -1,3 +1,4 @@
+#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
 extension OperationQueue {
     
     ///- Author: Scott Brenner | SBFoundation
@@ -9,3 +10,4 @@ extension OperationQueue {
         return queue
     }
 }
+#endif

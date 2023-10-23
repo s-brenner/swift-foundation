@@ -1,3 +1,4 @@
+#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
 extension Calendar {
     
     public static let buddhist = Calendar(identifier: .buddhist)
@@ -83,3 +84,4 @@ extension Calendar.Identifier: CustomStringConvertible {
         }
     }
 }
+#endif
