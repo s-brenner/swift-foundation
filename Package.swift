@@ -8,6 +8,7 @@ let package = Package(
     platforms: [.macOS(.v10_15), .iOS(.v13), .tvOS(.v13), .watchOS(.v6), .macCatalyst(.v13)],
     products: [
         .library(name: "SBFoundation", targets: ["SBFoundation"]),
+        .library(name: "SBFoundationMacros", targets: ["SBFoundationMacros"]),
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-syntax", from: "509.0.0"),
