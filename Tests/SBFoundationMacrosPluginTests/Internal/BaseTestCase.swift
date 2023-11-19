@@ -1,8 +1,13 @@
-//
-//  File.swift
-//  
-//
-//  Created by Scott Brenner on 11/19/23.
-//
+import MacroTesting
+import XCTest
 
-import Foundation
+class BaseTestCase: XCTestCase {
+    
+    override func invokeTest() {
+        withMacroTesting(
+//            isRecording: true
+        ) {
+            super.invokeTest()
+        }
+    }
+}

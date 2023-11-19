@@ -1,8 +1,11 @@
-//
-//  File.swift
-//  
-//
-//  Created by Scott Brenner on 11/19/23.
-//
+import SwiftCompilerPlugin
+import SwiftSyntaxMacros
 
-import Foundation
+@main
+struct MacrosPlugin: CompilerPlugin {
+    let providingMacros: [Macro.Type] = [
+        TimeZoneMacro.self,
+        URLMacro.self,
+        UUIDMacro.self
+    ]
+}

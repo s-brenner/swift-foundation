@@ -1,48 +1,40 @@
-import SwiftSyntaxMacros
-import SwiftSyntaxMacrosTestSupport
+import SBFoundationMacrosPlugin
+import MacroTesting
 import XCTest
 
-// Macro implementations build for the host, so the corresponding module is not available when cross-compiling. Cross-compiled tests may still make use of the macro itself in end-to-end tests.
-#if canImport(TimeZoneMacroMacros)
-import TimeZoneMacroMacros
-
-let testMacros: [String: Macro.Type] = [
-    "timeZone": TimeZoneMacro.self,
-//    "stringify": StringifyMacro.self,
-]
-#endif
-
-final class TimeZoneMacroTests: XCTestCase {
+final class TimeZoneMacroTests: BaseTestCase {
     
-    func testMacro() throws {
-        #if canImport(TimeZoneMacroMacros)
-        assertMacroExpansion(
-            """
-            #timeZone(identifier: "America/Denver")
-            """,
-            expandedSource: """
-            TimeZone(identifier: "America/Denver")!
-            """,
-            macros: testMacros
-        )
-        #else
-        throw XCTSkip("macros are only supported when running tests for the host platform")
-        #endif
+    override func invokeTest() {
+        withMacroTesting(
+            macros: ["TimeZone": TimeZoneMacro.self]
+        ) {
+            super.invokeTest()
+        }
     }
-
-//    func testMacroWithStringLiteral() throws {
-//        #if canImport(TimeZoneMacroMacros)
-//        assertMacroExpansion(
-//            #"""
-//            #stringify("Hello, \(name)")
-//            """#,
-//            expandedSource: #"""
-//            ("Hello, \(name)", #""Hello, \(name)""#)
-//            """#,
-//            macros: testMacros
-//        )
-//        #else
-//        throw XCTSkip("macros are only supported when running tests for the host platform")
-//        #endif
-//    }
+    
+    func testValidIdentifier() throws {
+        assertMacro {
+        """
+        #TimeZone(identifier: "America/Denver")
+        """
+        } expansion: {
+        """
+        TimeZone(identifier: "America/Denver")!
+        """
+        }
+    }
+    
+    func testInvalidIdentifier() throws {
+        assertMacro {
+        """
+        #TimeZone(identifier: "America/Altus")
+        """
+        } diagnostics: {
+        #"""
+        #TimeZone(identifier: "America/Altus")
+        ┬─────────────────────────────────────
+        ╰─ 🛑 message("invalid identifier: \"America/Altus\"")
+        """#
+        }
+    }
 }
