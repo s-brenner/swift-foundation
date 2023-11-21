@@ -19,7 +19,7 @@ public enum UUIDMacro: ExpressionMacro {
             throw CustomError.message("#UUID requires a static string literal")
         }
         guard let _ = UUID(uuidString: literalSegment.content.text) else {
-            throw CustomError.message("invalid uuidString: \(argument)")
+            throw CustomError.message("Invalid uuidString: \(argument)")
         }
         return "UUID(uuidString: \(argument))!"
     }

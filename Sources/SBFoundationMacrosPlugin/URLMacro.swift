@@ -19,7 +19,7 @@ public enum URLMacro: ExpressionMacro {
             throw CustomError.message("#URL requires a static string literal")
         }
         guard let _ = URL(string: literalSegment.content.text) else {
-            throw CustomError.message("invalid string: \(argument)")
+            throw CustomError.message("Invalid string: \(argument)")
         }
         return "URL(string: \(argument))!"
     }

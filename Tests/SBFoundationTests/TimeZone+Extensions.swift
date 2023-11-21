@@ -22,7 +22,7 @@ final class TimeZoneExtensionsTests: XCTestCase {
         XCTAssertEqual(TimeZone.knownTimeZoneIdentifiers.count, TimeZone.allCases.count)
         guard TimeZone.knownTimeZoneIdentifiers.count == TimeZone.allCases.count
         else {
-            print(TimeZone.allCasesBuilder.joined(separator: "\n"))
+            print(TimeZone.staticTimeZones.joined(separator: "\n\n"))
             return
         }
     }

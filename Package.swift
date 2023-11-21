@@ -19,10 +19,14 @@ let package = Package(
         .target(
             name: "SBFoundation",
             dependencies: [
+                "SBFoundationMacros",
                 .product(name: "SBStandardLibrary", package: "swift-standard-library"),
             ]
         ),
-        .testTarget(name: "SBFoundationTests", dependencies: ["SBFoundation"]),
+        .testTarget(
+            name: "SBFoundationTests",
+            dependencies: ["SBFoundation"]
+        ),
         .target(
           name: "SBFoundationMacros",
           dependencies: [

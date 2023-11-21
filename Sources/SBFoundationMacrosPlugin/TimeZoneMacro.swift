@@ -19,7 +19,7 @@ public enum TimeZoneMacro: ExpressionMacro {
             throw CustomError.message("#TimeZone requires a static string literal")
         }
         guard let _ = TimeZone(identifier: literalSegment.content.text) else {
-            throw CustomError.message("invalid identifier: \(argument)")
+            throw CustomError.message("Invalid identifier: \(argument)")
         }
         return "TimeZone(identifier: \(argument))!"
     }

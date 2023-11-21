@@ -30,11 +30,11 @@ final class TimeZoneMacroTests: BaseTestCase {
         #TimeZone(identifier: "America/Altus")
         """
         } diagnostics: {
-        #"""
+        """
         #TimeZone(identifier: "America/Altus")
         ┬─────────────────────────────────────
-        ╰─ 🛑 message("invalid identifier: \"America/Altus\"")
-        """#
+        ╰─ 🛑 Invalid identifier: "America/Altus"
+        """
         }
     }
 }

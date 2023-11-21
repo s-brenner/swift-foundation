@@ -27,16 +27,14 @@ final class UUIDMacroTests: BaseTestCase {
     func testInvalidIdentifier() throws {
         assertMacro {
         """
-        #UUID(uuidString: ""bl0b0000-dead-beef-dead-beefdeadbeef"")
+        #UUID(uuidString: "bl0b0000-dead-beef-dead-beefdeadbeef")
         """
         } diagnostics: {
-        #"""
-        #UUID(uuidString: ""bl0b0000-dead-beef-dead-beefdeadbeef"")
-                            ┬─────────────────────────────────────
-        │                   ╰─ 🛑 unexpected code 'bl0b0000-dead-beef-dead-beefdeadbeef""' in macro expansion
-        ┬──────────────────────────────────────────────────────────
-        ╰─ 🛑 message("invalid uuidString: \"\"")
-        """#
+        """
+        #UUID(uuidString: "bl0b0000-dead-beef-dead-beefdeadbeef")
+        ┬────────────────────────────────────────────────────────
+        ╰─ 🛑 Invalid uuidString: "bl0b0000-dead-beef-dead-beefdeadbeef"
+        """
         }
     }
 }
