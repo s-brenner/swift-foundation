@@ -102,4 +102,10 @@ public typealias Temperature = Measurement<UnitTemperature>
 
 ///- Author: Scott Brenner | SBFoundation
 public typealias Volume = Measurement<UnitVolume>
+
+extension Measurement where UnitType: Dimension {
+    
+    ///- Author: Scott Brenner | SBFoundation
+    public static var zero: Self { Self(0, UnitType.baseUnit()) }
+}
 #endif
