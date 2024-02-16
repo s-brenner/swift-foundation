@@ -12,7 +12,8 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-syntax", from: "509.0.0"),
-        .package(url: "https://github.com/pointfreeco/swift-macro-testing", from: "0.2.0"),
+        .package(url: "https://github.com/pointfreeco/swift-macro-testing", from: "0.0.0"),
+        .package(url: "https://github.com/pointfreeco/swift-tagged", from: "0.0.0"),
         .package(url: "https://github.com/s-brenner/swift-standard-library", from: "0.0.0"),
     ],
     targets: [
@@ -21,6 +22,7 @@ let package = Package(
             dependencies: [
                 "SBFoundationMacros",
                 .product(name: "SBStandardLibrary", package: "swift-standard-library"),
+                .product(name: "Tagged", package: "swift-tagged"),
             ]
         ),
         .testTarget(
