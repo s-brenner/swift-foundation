@@ -12,6 +12,15 @@ extension Measurement {
 
 extension Measurement where UnitType: Dimension {
     
+    public static func `optional`(_ value: Double?, _ unit: UnitType) -> Measurement? {
+        guard let value = value
+        else { return nil }
+        return Measurement(value: value, unit: unit)
+    }
+    
+    ///- Author: Scott Brenner | SBFoundation
+    public static var zero: Self { Self(0, UnitType.baseUnit()) }
+    
     ///- Author: Scott Brenner | SBFoundation
     public func isAlmostEqual(to rhs: Measurement<UnitType>, tolerance: Double = 0.00001) -> Bool {
         Swift.abs(rhs.converted(to: unit).value - value) <= tolerance
@@ -102,10 +111,4 @@ public typealias Temperature = Measurement<UnitTemperature>
 
 ///- Author: Scott Brenner | SBFoundation
 public typealias Volume = Measurement<UnitVolume>
-
-extension Measurement where UnitType: Dimension {
-    
-    ///- Author: Scott Brenner | SBFoundation
-    public static var zero: Self { Self(0, UnitType.baseUnit()) }
-}
 #endif
