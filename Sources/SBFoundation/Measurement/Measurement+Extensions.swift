@@ -2,21 +2,18 @@
 extension Measurement {
     
     ///- Author: Scott Brenner | SBFoundation
-    public init(_ value: Double, _ unit: UnitType) {
-        self.init(value: value, unit: unit)
-    }
+    public var abs: Self { Measurement(value: Swift.abs(value), unit: unit) }
     
     ///- Author: Scott Brenner | SBFoundation
-    public var abs: Self { Measurement(value: Swift.abs(value), unit: unit) }
+    public func rounded(
+        places: Int = 0,
+        rule: FloatingPointRoundingRule = .toNearestOrAwayFromZero
+    ) -> Self {
+        .init(value: value.roundedTo(places: places, rule: rule), unit: unit)
+    }
 }
 
 extension Measurement where UnitType: Dimension {
-    
-    public static func `optional`(_ value: Double?, _ unit: UnitType) -> Measurement? {
-        guard let value = value
-        else { return nil }
-        return Measurement(value: value, unit: unit)
-    }
     
     ///- Author: Scott Brenner | SBFoundation
     public static var zero: Self { Self(0, UnitType.baseUnit()) }
@@ -24,14 +21,6 @@ extension Measurement where UnitType: Dimension {
     ///- Author: Scott Brenner | SBFoundation
     public func isAlmostEqual(to rhs: Measurement<UnitType>, tolerance: Double = 0.00001) -> Bool {
         Swift.abs(rhs.converted(to: unit).value - value) <= tolerance
-    }
-    
-    ///- Author: Scott Brenner | SBFoundation
-    public func rounded(
-        places: Int = 0,
-        rule: FloatingPointRoundingRule = .toNearestOrAwayFromZero
-    ) -> Measurement<UnitType> {
-        .init(value: value.roundedTo(places: places, rule: rule), unit: unit)
     }
     
     ///- Author: Scott Brenner | SBFoundation
