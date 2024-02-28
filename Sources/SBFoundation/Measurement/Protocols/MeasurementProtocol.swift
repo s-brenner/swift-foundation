@@ -8,6 +8,7 @@ public protocol MeasurementProtocol {
     init(_ value: Double, _ unit: UnitType)
     
     ///- Author: Scott Brenner | SBFoundation
+    @_disfavoredOverload
     init?(_ value: Double?, _ unit: UnitType)
 }
 
