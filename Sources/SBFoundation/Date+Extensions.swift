@@ -21,6 +21,31 @@ extension Date {
 }
 
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+extension Date.FormatStyle {
+    
+    ///- Author: Scott Brenner | SBFoundation
+    public func calendar(_ calendar: Calendar) -> Self {
+        var style = self
+        style.calendar = calendar
+        return style
+    }
+    
+    ///- Author: Scott Brenner | SBFoundation
+    public func timeZone(_ timeZone: TimeZone) -> Self {
+        var style = self
+        style.timeZone = timeZone
+        return style
+    }
+    
+    ///- Author: Scott Brenner | SBFoundation
+    public func capitalizationContext(_ capitalizationContext: FormatStyleCapitalizationContext) -> Self {
+        var style = self
+        style.capitalizationContext = capitalizationContext
+        return style
+    }
+}
+
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension Date.RelativeFormatStyle {
     
     ///- Author: Scott Brenner | SBFoundation
