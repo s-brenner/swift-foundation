@@ -13,7 +13,35 @@ extension Measurement {
     }
 }
 
-extension Measurement where UnitType: Dimension {
+extension Measurement
+where UnitType: Dimension {
+    
+    ///- Author: Scott Brenner | SBFoundation
+    @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+    public struct CustomFormatStyle: Foundation.FormatStyle {
+                
+        let style: Measurement.FormatStyle
+        
+        ///- Author: Scott Brenner | SBFoundation
+        public static func measurement(
+            width: Measurement<UnitType>.FormatStyle.UnitWidth,
+            usage: MeasurementFormatUnitUsage<UnitType> = .general,
+            numberFormatStyle: FloatingPointFormatStyle<Double>? = nil
+        ) -> Self {
+            self.init(style: .measurement(width: width, usage: usage, numberFormatStyle: numberFormatStyle))
+        }
+        
+        ///- Author: Scott Brenner | SBFoundation
+        public func format(_ value: Measurement<UnitType>) -> String {
+            value.formatted(style)
+        }
+    }
+    
+    ///- Author: Scott Brenner | SBFoundation
+    @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+    public func formatted(_ customStyle: CustomFormatStyle) -> String {
+        customStyle.format(self)
+    }
     
     ///- Author: Scott Brenner | SBFoundation
     public static var zero: Self { Self(0, UnitType.baseUnit()) }
@@ -26,6 +54,22 @@ extension Measurement where UnitType: Dimension {
     ///- Author: Scott Brenner | SBFoundation
     public static func /(lhs: Self, rhs: Self) -> Double {
         lhs.converted(to: .baseUnit()).value / rhs.converted(to: .baseUnit()).value
+    }
+}
+
+///- Author: Scott Brenner | SBFoundation
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+extension Measurement.CustomFormatStyle
+where UnitType == UnitTemperature {
+    
+    ///- Author: Scott Brenner | SBFoundation
+    public static func measurement(
+        width: Measurement<UnitType>.FormatStyle.UnitWidth,
+        usage: MeasurementFormatUnitUsage<UnitType> = .general,
+        hidesScaleName: Bool = false,
+        numberFormatStyle: FloatingPointFormatStyle<Double>? = nil
+    ) -> Self {
+        self.init(style: .measurement(width: width, usage: usage, hidesScaleName: hidesScaleName, numberFormatStyle: numberFormatStyle))
     }
 }
 
@@ -100,4 +144,24 @@ public typealias Temperature = Measurement<UnitTemperature>
 
 ///- Author: Scott Brenner | SBFoundation
 public typealias Volume = Measurement<UnitVolume>
+#endif
+
+#if canImport(SwiftUI)
+import SwiftUI
+
+extension SwiftUI.Angle {
+    
+    ///- Author: Scott Brenner | SBFoundation
+    public init(_ angle: Angle) {
+        self.init(degrees: angle.converted(to: .degrees).value)
+    }
+}
+
+extension Angle {
+    
+    ///- Author: Scott Brenner | SBFoundation
+    public init(_ angle: SwiftUI.Angle) {
+        self.init(angle.degrees, .degrees)
+    }
+}
 #endif
