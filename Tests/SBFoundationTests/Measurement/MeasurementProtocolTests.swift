@@ -31,7 +31,7 @@ final class MeasurementProtocolTests: XCTestCase {
     func test() throws {
         let encodedData = try JSONEncoder().encode(Runway.Response(length_ft: 10000, displaced_threshold_ft: nil))
         let runway = try JSONDecoder().decode(Runway.self, from: encodedData)
-        XCTAssertEqual(runway.length, Length(10000, .feet))
+        XCTAssertEqual(runway.length, 10000(.feet))
         XCTAssertNil(runway.displacedThreshold)
     }
 }
