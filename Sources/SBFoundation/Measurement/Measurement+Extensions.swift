@@ -55,6 +55,12 @@ where UnitType: Dimension {
     public static func /(lhs: Self, rhs: Self) -> Double {
         lhs.converted(to: .baseUnit()).value / rhs.converted(to: .baseUnit()).value
     }
+    
+    ///- Author: Scott Brenner | SBFoundation
+    public subscript(unit: UnitType) -> Self {
+        get { converted(to: unit) }
+        set { self = newValue }
+    }
 }
 
 ///- Author: Scott Brenner | SBFoundation
