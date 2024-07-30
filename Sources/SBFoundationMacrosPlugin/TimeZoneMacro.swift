@@ -11,7 +11,7 @@ public enum TimeZoneMacro: ExpressionMacro {
         of node: some FreestandingMacroExpansionSyntax,
         in context: some MacroExpansionContext
     ) throws -> ExprSyntax {
-        guard let argument = node.argumentList.first?.expression,
+        guard let argument = node.arguments.first?.expression,
               let segments = argument.as(StringLiteralExprSyntax.self)?.segments,
               segments.count == 1,
               case .stringSegment(let literalSegment)? = segments.first
