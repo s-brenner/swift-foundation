@@ -61,6 +61,27 @@ where UnitType: Dimension {
         get { converted(to: unit) }
         set { self = newValue }
     }
+    
+    /// Returns the `y` value for the value of `self` along the line between points `p0` and `p1`.
+    ///- Author: Scott Brenner | SBFoundation
+    ///- Parameter p0: The first point.
+    ///- Parameter p1: The second point.
+    ///- Returns: The `y` value for the value of `self` along the line between the two points or `nil` if the value of `self` is not along the line between the two points.
+    public func interpolate<OtherUnitType>(
+        between p0: (x: Measurement<UnitType>, y: Measurement<OtherUnitType>),
+        and p1: (x: Measurement<UnitType>, y: Measurement<OtherUnitType>)
+    ) -> Measurement<OtherUnitType>?
+    where OtherUnitType: Dimension {
+        guard let value = SBStandardLibrary.interpolate(
+            x: value,
+            x1: p0.x.converted(to: unit).value,
+            y1: p0.y.value,
+            x2: p1.x.converted(to: unit).value,
+            y2: p1.y.converted(to: p0.y.unit).value
+        )
+        else { return nil }
+        return Measurement<OtherUnitType>(value, p0.y.unit)
+    }
 }
 
 ///- Author: Scott Brenner | SBFoundation
