@@ -42,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/s-brenner/swift-standard-library",
       "state" : {
-        "revision" : "c924ca45c07ae72a3b06274b035bf0281166dcce",
-        "version" : "0.7.0"
+        "revision" : "885f3c34e5ff5462efeea64d50b33813e0ce9ea6",
+        "version" : "0.9.0"
       }
     },
     {

@@ -67,20 +67,37 @@ where UnitType: Dimension {
     ///- Parameter p0: The first point.
     ///- Parameter p1: The second point.
     ///- Returns: The `y` value for the value of `self` along the line between the two points or `nil` if the value of `self` is not along the line between the two points.
+    ///- Note: A `nil` return value indicates that extrapolation is necessary.
     public func interpolate<OtherUnitType>(
         between p0: (x: Measurement<UnitType>, y: Measurement<OtherUnitType>),
         and p1: (x: Measurement<UnitType>, y: Measurement<OtherUnitType>)
     ) -> Measurement<OtherUnitType>?
     where OtherUnitType: Dimension {
-        guard let value = SBStandardLibrary.interpolate(
-            x: value,
-            x1: p0.x.converted(to: unit).value,
-            y1: p0.y.value,
-            x2: p1.x.converted(to: unit).value,
-            y2: p1.y.converted(to: p0.y.unit).value
+        guard let newValue = value.interpolate(
+            between: (p0.x.converted(to: unit).value, p0.y.value),
+            and: (p1.x.converted(to: unit).value, p1.y.converted(to: p0.y.unit).value)
         )
         else { return nil }
-        return Measurement<OtherUnitType>(value, p0.y.unit)
+        return Measurement<OtherUnitType>(newValue, p0.y.unit)
+    }
+    
+    /// Returns the `y` value for the value of `self` along the line extended from points `p0` and `p1`.
+    ///- Author: Scott Brenner | SBFoundation
+    ///- Parameter p0: The first point.
+    ///- Parameter p1: The second point.
+    ///- Returns: The `y` value for the value of `self` along the line extended from the two points or `nil` if the value of `self` is along the line between the two points.
+    ///- Note: A `nil` return value indicates that interpolation is necessary.
+    public func extrapolate<OtherUnitType>(
+        from p0: (x: Measurement<UnitType>, y: Measurement<OtherUnitType>),
+        and p1: (x: Measurement<UnitType>, y: Measurement<OtherUnitType>)
+    ) -> Measurement<OtherUnitType>?
+    where OtherUnitType: Dimension {
+        guard let newValue = value.extrapolate(
+            from: (p0.x.converted(to: unit).value, p0.y.value),
+            and: (p1.x.converted(to: unit).value, p1.y.converted(to: p0.y.unit).value)
+        )
+        else { return nil }
+        return Measurement<OtherUnitType>(newValue, p0.y.unit)
     }
 }
 
