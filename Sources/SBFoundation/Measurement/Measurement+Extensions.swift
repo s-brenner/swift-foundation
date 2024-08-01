@@ -67,7 +67,7 @@ where UnitType: Dimension {
     ///- Parameter p0: The first point.
     ///- Parameter p1: The second point.
     ///- Returns: The `y` value for the value of `self` along the line between the two points or `nil` if the value of `self` is not along the line between the two points.
-    ///- Note: A `nil` return value indicates that extrapolation is necessary.
+    ///- Note: A `nil` return value indicates that either both points share a common `x` value or extrapolation is necessary.
     public func interpolate<OtherUnitType>(
         between p0: (x: Measurement<UnitType>, y: Measurement<OtherUnitType>),
         and p1: (x: Measurement<UnitType>, y: Measurement<OtherUnitType>)
@@ -86,7 +86,7 @@ where UnitType: Dimension {
     ///- Parameter p0: The first point.
     ///- Parameter p1: The second point.
     ///- Returns: The `y` value for the value of `self` along the line extended from the two points or `nil` if the value of `self` is along the line between the two points.
-    ///- Note: A `nil` return value indicates that interpolation is necessary.
+    ///- Note: A `nil` return value indicates that either both points share a common `x` value or interpolation is necessary.
     public func extrapolate<OtherUnitType>(
         from p0: (x: Measurement<UnitType>, y: Measurement<OtherUnitType>),
         and p1: (x: Measurement<UnitType>, y: Measurement<OtherUnitType>)
