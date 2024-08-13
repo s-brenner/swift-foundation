@@ -9,13 +9,13 @@ final class URLSessionExtensionsTests: XCTestCase {
         do {
             var expectedContentLength = 0
             var downloadProgress = -0.01
-            for try await status in URLSession.shared.downloadStatus(from: url) {
+            let (_, statuses) = try await URLSession.shared.dataStatus(from: url)
+            for try await status in statuses {
                 switch status {
-                case .response(let response):
-                    expectedContentLength = Int(response.expectedContentLength)
                 case .downloading(let progress):
                     XCTAssertEqual(progress.fractionCompleted, downloadProgress + 0.01, accuracy: 0.0001)
                     downloadProgress = progress.fractionCompleted
+                    expectedContentLength = progress.totalBytesExpectedToWrite
                 case .finished(let data):
                     XCTAssertEqual(data.count, expectedContentLength)
                 }

@@ -29,27 +29,23 @@ extension URLSession {
     }
     
     public enum DownloadStatus<Output> {
-        case response(HTTPURLResponse)
         case downloading(DownloadProgress)
         case finished(Output)
     }
     
     public typealias AsyncDownloadStatus<T> = AsyncThrowingStream<DownloadStatus<T>, Error>
     
-    public func downloadStatus(from url: URL) -> AsyncDownloadStatus<Data> {
+    public func dataStatus(from url: URL) async throws -> (response: URLResponse, status: AsyncDownloadStatus<Data>) {
         let request = URLRequest(url: url)
-        return downloadStatus(for: request)
+        return try await dataStatus(for: request)
     }
     
-    public func downloadStatus(for request: URLRequest) -> AsyncDownloadStatus<Data> {
-        AsyncDownloadStatus { continuation in
+    public func dataStatus(for request: URLRequest) async throws -> (response: URLResponse, status: AsyncDownloadStatus<Data>) {
+        let (bytes, response) = try await self.bytes(for: request)
+        let status = AsyncDownloadStatus<Data> { continuation in
             Task {
                 do {
-                    let (bytes, response) = try await self.bytes(for: request)
                     let length = Int(response.expectedContentLength)
-                    if let response = response as? HTTPURLResponse {
-                        continuation.yield(.response(response))
-                    }
                     var data = Data()
                     if length.isPositive {
                         data.reserveCapacity(length)
@@ -78,6 +74,7 @@ extension URLSession {
                 }
             }
         }
+        return (response, status)
     }
 }
 
@@ -86,7 +83,6 @@ extension URLSession.DownloadStatus {
     
     public func map<T>(_ transform: (Output) throws -> T) rethrows -> URLSession.DownloadStatus<T> {
         switch self {
-        case .response(let response): return .response(response)
         case .downloading(let progress): return .downloading(progress)
         case .finished(let output): return .finished(try transform(output))
         }
