@@ -78,6 +78,14 @@ extension URLSession {
     }
 }
 
+extension URLResponse {
+    
+    @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+    public var initialDownloadStatus: URLSession.DownloadProgress {
+        .zero(totalBytesExpectedToWrite: Int(expectedContentLength))
+    }
+}
+
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension URLSession.DownloadStatus {
     
