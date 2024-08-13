@@ -14,8 +14,8 @@ final class URLSessionExtensionsTests: XCTestCase {
                 case .response(let response):
                     expectedContentLength = Int(response.expectedContentLength)
                 case .downloading(let progress):
-                    XCTAssertEqual(progress, downloadProgress + 0.01, accuracy: 0.0001)
-                    downloadProgress = progress
+                    XCTAssertEqual(progress.fractionCompleted, downloadProgress + 0.01, accuracy: 0.0001)
+                    downloadProgress = progress.fractionCompleted
                 case .finished(let data):
                     XCTAssertEqual(data.count, expectedContentLength)
                 }
