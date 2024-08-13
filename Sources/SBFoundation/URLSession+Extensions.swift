@@ -8,13 +8,15 @@ extension URLSession {
         case finished(Output)
     }
     
-    public func downloadStatus(from url: URL) -> AsyncThrowingStream<DownloadStatus<Data>, Error> {
+    public typealias AsyncDownloadStatus<T> = AsyncThrowingStream<DownloadStatus<T>, Error>
+    
+    public func downloadStatus(from url: URL) -> AsyncDownloadStatus<Data> {
         let request = URLRequest(url: url)
         return downloadStatus(for: request)
     }
     
-    public func downloadStatus(for request: URLRequest) -> AsyncThrowingStream<DownloadStatus<Data>, Error> {
-        AsyncThrowingStream { continuation in
+    public func downloadStatus(for request: URLRequest) -> AsyncDownloadStatus<Data> {
+        AsyncDownloadStatus { continuation in
             Task {
                 do {
                     let (bytes, response) = try await self.bytes(for: request)
@@ -65,23 +67,23 @@ extension URLSession.DownloadStatus {
     }
 }
 
-//@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
-//extension URLSession.DownloadStatus where Output == Data {
-//    
-//    public func decode<T>(
-//        _ type: T.Type = T.self,
-//        using decoder: JSONDecoder = JSONDecoder()
-//    ) throws -> URLSession.DownloadStatus<T>
-//    where T: Decodable {
-//        try map { try decoder.decode(type, from: $0) }
-//    }
-//}
-//
-//@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
-//extension URLSession.DownloadStatus where Output: Collection {
-//    
-//    public func mapEach<T>(_ transform: (Output.Element) throws -> T) rethrows -> URLSession.DownloadStatus<[T]> {
-//        try map { try $0.map(transform) }
-//    }
-//}
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+extension URLSession.DownloadStatus where Output == Data {
+    
+    public func decode<T>(
+        _ type: T.Type = T.self,
+        using decoder: JSONDecoder = JSONDecoder()
+    ) throws -> URLSession.DownloadStatus<T>
+    where T: Decodable {
+        try map { try decoder.decode(type, from: $0) }
+    }
+}
+
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+extension URLSession.DownloadStatus where Output: Collection {
+    
+    public func mapEach<T>(_ transform: (Output.Element) throws -> T) rethrows -> URLSession.DownloadStatus<[T]> {
+        try map { try $0.map(transform) }
+    }
+}
 #endif
