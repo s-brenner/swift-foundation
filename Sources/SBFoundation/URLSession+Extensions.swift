@@ -2,18 +2,18 @@
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension URLSession {
     
-    public enum DownloadStatus {
+    public enum DownloadStatus<Output> {
         case response(HTTPURLResponse)
         case downloading(Double)
-        case finished(Data)
+        case finished(Output)
     }
     
-    public func downloadStatus(from url: URL) -> AsyncThrowingStream<DownloadStatus, Error> {
+    public func downloadStatus(from url: URL) -> AsyncThrowingStream<DownloadStatus<Data>, Error> {
         let request = URLRequest(url: url)
         return downloadStatus(for: request)
     }
     
-    public func downloadStatus(for request: URLRequest) -> AsyncThrowingStream<DownloadStatus, Error> {
+    public func downloadStatus(for request: URLRequest) -> AsyncThrowingStream<DownloadStatus<Data>, Error> {
         AsyncThrowingStream { continuation in
             Task {
                 do {
@@ -52,4 +52,36 @@ extension URLSession {
         }
     }
 }
+
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+extension URLSession.DownloadStatus {
+    
+    public func map<T>(_ transform: (Output) throws -> T) rethrows -> URLSession.DownloadStatus<T> {
+        switch self {
+        case .response(let response): return .response(response)
+        case .downloading(let progress): return .downloading(progress)
+        case .finished(let output): return .finished(try transform(output))
+        }
+    }
+}
+
+//@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+//extension URLSession.DownloadStatus where Output == Data {
+//    
+//    public func decode<T>(
+//        _ type: T.Type = T.self,
+//        using decoder: JSONDecoder = JSONDecoder()
+//    ) throws -> URLSession.DownloadStatus<T>
+//    where T: Decodable {
+//        try map { try decoder.decode(type, from: $0) }
+//    }
+//}
+//
+//@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+//extension URLSession.DownloadStatus where Output: Collection {
+//    
+//    public func mapEach<T>(_ transform: (Output.Element) throws -> T) rethrows -> URLSession.DownloadStatus<[T]> {
+//        try map { try $0.map(transform) }
+//    }
+//}
 #endif
