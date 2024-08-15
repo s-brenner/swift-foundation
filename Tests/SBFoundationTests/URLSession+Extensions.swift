@@ -3,27 +3,62 @@ import XCTest
 
 final class URLSessionExtensionsTests: XCTestCase {
     
-    @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8.0, *)
-    func testDownloadStatus() async {
-        let url = URL(string: "https://www.nasa.gov/sites/default/files/thumbnails/image/iss067e005682.jpg")!
-        do {
-            var expectedContentLength = 0
-            var downloadProgress = -0.01
-            let (_, statuses) = try await URLSession.shared.dataStatus(from: url)
-            for try await status in statuses {
-                switch status {
-                case .downloading(let progress):
-                    XCTAssertEqual(progress.fractionCompleted, downloadProgress + 0.01, accuracy: 0.0001)
-                    downloadProgress = progress.fractionCompleted
-                    expectedContentLength = progress.totalBytesExpectedToWrite
-                case .finished(let data):
-                    XCTAssertEqual(data.count, expectedContentLength)
+    @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
+    func testDownload() async throws {
+        let urls = [
+            #URL(string: "https://raw.githubusercontent.com/s-brenner/performance/main/aircraft.json"),
+            #URL(string: "https://raw.githubusercontent.com/s-brenner/performance/main/non_normal_configuration.json"),
+        ]
+        var progress: URLSession.CumulativeDownloadProgress?
+        for try await status in URLSession.shared.download(from: urls) {
+            switch status {
+            case .cumulativeProgress(let cumulativeProgress):
+                progress = cumulativeProgress
+            case .downloadProgress(let downloadProgress):
+//                if let url = downloadProgress.request.url {
+//                    print("Download Progress: \(downloadProgress.fractionCompleted.formatted(.percent)) | \(url.lastPathComponent)")
+//                }
+                if let previousFractionCompleted = progress?.fractionCompleted,
+                   let fractionCompleted = progress?.update(child: downloadProgress) {
+                    XCTAssertEqual(fractionCompleted, previousFractionCompleted + 0.01, accuracy: 0.0001)
+//                    print("Cumulative Progress: \(fractionCompleted.formatted(.percent))")
+                }
+            case .finished(let request, let url):
+                if let data = try? Data(contentsOf: url),
+                   let url = request.url {
+                    XCTAssertEqual(progress?.child(for: request)?.totalBytesExpectedToWrite, data.count)
+                    print("Finished: \(data.description) | \(url.lastPathComponent)")
                 }
             }
         }
-        catch {
-            print(error)
-            XCTFail("\(error.localizedDescription)")
+    }
+    
+    @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
+    func testData() async throws {
+        let urls = [
+            #URL(string: "https://raw.githubusercontent.com/s-brenner/performance/main/aircraft.json"),
+            #URL(string: "https://raw.githubusercontent.com/s-brenner/performance/main/non_normal_configuration.json"),
+        ]
+        var progress: URLSession.CumulativeDownloadProgress?
+        for try await status in URLSession.shared.data(from: urls) {
+            switch status {
+            case .cumulativeProgress(let cumulativeProgress):
+                progress = cumulativeProgress
+            case .downloadProgress(let downloadProgress):
+//                if let url = downloadProgress.request.url {
+//                    print("Download Progress: \(downloadProgress.fractionCompleted.formatted(.percent)) | \(url.lastPathComponent)")
+//                }
+                if let previousFractionCompleted = progress?.fractionCompleted,
+                   let fractionCompleted = progress?.update(child: downloadProgress) {
+                    XCTAssertEqual(fractionCompleted, previousFractionCompleted + 0.01, accuracy: 0.0001)
+//                    print("Cumulative Progress: \(fractionCompleted.formatted(.percent))")
+                }
+            case .finished(let request, let data):
+                if let url = request.url {
+                    XCTAssertEqual(progress?.child(for: request)?.totalBytesExpectedToWrite, data.count)
+                    print("Finished: \(data.description) | \(url.lastPathComponent)")
+                }
+            }
         }
     }
 }
