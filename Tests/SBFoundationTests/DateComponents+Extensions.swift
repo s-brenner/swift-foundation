@@ -49,10 +49,10 @@ final class DateComponentsExtensionsTests: XCTestCase {
         XCTAssertNil(components[.timeZone])
     }
     
-    func testToString() {
+    func testFormatted() {
         let dateComponents = DateComponents(day: 1, hour: 0, minute: 12)
-        XCTAssertEqual(dateComponents.toString(withConfiguration: .dayHourMinute), "1d 0h 12m")
-        XCTAssertEqual(dateComponents.toString(), "1d 0h 12m")
+        XCTAssertEqual(dateComponents.formatted(with: .dayHourMinute), "1d 0h 12m")
+        XCTAssertEqual(dateComponents.formatted(), "1d 0h 12m")
     }
     
     func testComparable() {

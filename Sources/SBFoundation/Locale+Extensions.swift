@@ -111,6 +111,8 @@ extension Locale {
 
     public static let bhojpuriIndia: Self = "bho_IN"
 
+    public static let aniiBenin: Self = "blo_BJ"
+
     public static let bambaraMali: Self = "bm_ML"
 
     public static let banglaBangladesh: Self = "bn_BD"
@@ -166,6 +168,8 @@ extension Locale {
     public static let corsicanFrance: Self = "co_FR"
 
     public static let czechCzechia: Self = "cs_CZ"
+
+    public static let swampyCreeCanada: Self = "csw_CA"
 
     public static let chuvashRussia: Self = "cv_RU"
 
@@ -911,6 +915,22 @@ extension Locale {
 
     public static let cornishUnitedKingdom: Self = "kw_GB"
 
+    public static let kuviDevanagari: Self = "kxv_Deva"
+
+    public static let kuviDevanagariIndia: Self = "kxv_Deva_IN"
+
+    public static let kuviLatin: Self = "kxv_Latn"
+
+    public static let kuviLatinIndia: Self = "kxv_Latn_IN"
+
+    public static let kuviOdia: Self = "kxv_Orya"
+
+    public static let kuviOdiaIndia: Self = "kxv_Orya_IN"
+
+    public static let kuviTelugu: Self = "kxv_Telu"
+
+    public static let kuviTeluguIndia: Self = "kxv_Telu_IN"
+
     public static let kyrgyzKyrgyzstan: Self = "ky_KG"
 
     public static let langiTanzania: Self = "lag_TZ"
@@ -1006,6 +1026,8 @@ extension Locale {
     public static let malteseMalta: Self = "mt_MT"
 
     public static let mundangCameroon: Self = "mua_CM"
+
+    public static let mvskokeUnitedStates: Self = "mus_US"
 
     public static let burmeseMyanmarBurma: Self = "my_MM"
 
@@ -1203,11 +1225,11 @@ extension Locale {
 
     public static let sindhiDevanagariIndia: Self = "sd_Deva_IN"
 
-    public static let northernSamiFinland: Self = "se_FI"
+    public static let northSámiFinland: Self = "se_FI"
 
-    public static let northernSamiNorway: Self = "se_NO"
+    public static let northSámiNorway: Self = "se_NO"
 
-    public static let northernSamiSweden: Self = "se_SE"
+    public static let northSámiSweden: Self = "se_SE"
 
     public static let senaMozambique: Self = "seh_MZ"
 
@@ -1335,6 +1357,8 @@ extension Locale {
 
     public static let tonganTonga: Self = "to_TO"
 
+    public static let tokiPonaWorld: Self = "tok_001"
+
     public static let turkishCyprus: Self = "tr_CY"
 
     public static let turkishTürkiye: Self = "tr_TR"
@@ -1385,6 +1409,8 @@ extension Locale {
 
     public static let vendaSouthAfrica: Self = "ve_ZA"
 
+    public static let venetianItaly: Self = "vec_IT"
+
     public static let vietnameseVietnam: Self = "vi_VN"
 
     public static let makhuwaMozambique: Self = "vmw_MZ"
@@ -1400,6 +1426,8 @@ extension Locale {
     public static let wolofSenegal: Self = "wo_SN"
 
     public static let xhosaSouthAfrica: Self = "xh_ZA"
+
+    public static let kangriIndia: Self = "xnr_IN"
 
     public static let sogaUganda: Self = "xog_UG"
 
@@ -1456,9 +1484,9 @@ extension Locale {
     public static let zuluSouthAfrica: Self = "zu_ZA"
 }
 
-extension Locale: CaseIterable {
+extension Locale: @retroactive CaseIterable {
     
-    static public var allCases: [Locale] = [
+    static public let allCases: [Locale] = [
         .afrikaansNamibia,
         .afrikaansSouthAfrica,
         .aghemCameroon,
@@ -1514,6 +1542,7 @@ extension Locale: CaseIterable {
         .bulgarianBulgaria,
         .haryanviIndia,
         .bhojpuriIndia,
+        .aniiBenin,
         .bambaraMali,
         .banglaBangladesh,
         .banglaIndia,
@@ -1542,6 +1571,7 @@ extension Locale: CaseIterable {
         .kurdishSoraniIran,
         .corsicanFrance,
         .czechCzechia,
+        .swampyCreeCanada,
         .chuvashRussia,
         .welshUnitedKingdom,
         .danishDenmark,
@@ -1914,6 +1944,14 @@ extension Locale: CaseIterable {
         .colognianGermany,
         .kurdishTürkiye,
         .cornishUnitedKingdom,
+        .kuviDevanagari,
+        .kuviDevanagariIndia,
+        .kuviLatin,
+        .kuviLatinIndia,
+        .kuviOdia,
+        .kuviOdiaIndia,
+        .kuviTelugu,
+        .kuviTeluguIndia,
         .kyrgyzKyrgyzstan,
         .langiTanzania,
         .luxembourgishLuxembourg,
@@ -1962,6 +2000,7 @@ extension Locale: CaseIterable {
         .malaySingapore,
         .malteseMalta,
         .mundangCameroon,
+        .mvskokeUnitedStates,
         .burmeseMyanmarBurma,
         .erzyaRussia,
         .mazanderaniIran,
@@ -2060,9 +2099,9 @@ extension Locale: CaseIterable {
         .sindhiArabicPakistan,
         .sindhiDevanagari,
         .sindhiDevanagariIndia,
-        .northernSamiFinland,
-        .northernSamiNorway,
-        .northernSamiSweden,
+        .northSámiFinland,
+        .northSámiNorway,
+        .northSámiSweden,
         .senaMozambique,
         .koyraboroSenniMali,
         .sangoCentralAfricanRepublic,
@@ -2126,6 +2165,7 @@ extension Locale: CaseIterable {
         .tswanaBotswana,
         .tswanaSouthAfrica,
         .tonganTonga,
+        .tokiPonaWorld,
         .turkishCyprus,
         .turkishTürkiye,
         .tarokoTaiwan,
@@ -2151,6 +2191,7 @@ extension Locale: CaseIterable {
         .vai,
         .vaiLiberia,
         .vendaSouthAfrica,
+        .venetianItaly,
         .vietnameseVietnam,
         .makhuwaMozambique,
         .vunjoTanzania,
@@ -2159,6 +2200,7 @@ extension Locale: CaseIterable {
         .wolayttaEthiopia,
         .wolofSenegal,
         .xhosaSouthAfrica,
+        .kangriIndia,
         .sogaUganda,
         .yangbenCameroon,
         .yiddishUkraine,
@@ -2189,7 +2231,7 @@ extension Locale: CaseIterable {
     ]
 }
 
-extension Locale: ExpressibleByStringInterpolation, ExpressibleByStringLiteral {
+extension Locale: @retroactive ExpressibleByStringInterpolation, @retroactive ExpressibleByStringLiteral {
     
     public init(stringLiteral value: String) {
         self.init(identifier: value)

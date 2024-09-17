@@ -890,7 +890,7 @@ extension TimeZone {
 }
 
 #if os(macOS)
-extension TimeZone: CaseIterable {
+extension TimeZone: @retroactive CaseIterable {
     
     public static let allCases: [TimeZone] = [
         .africaAbidjan,

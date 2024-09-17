@@ -40,22 +40,27 @@ extension DateComponents {
         case .nanosecond: return nanosecond
         case .calendar: return nil
         case .timeZone: return nil
+        case .dayOfYear:
+            if #available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, *) {
+                return dayOfYear
+            }
+            else {
+                return nil
+            }
         case .isLeapMonth: return nil
         @unknown default: return nil
         }
     }
     
-    /// Convert receiver to a string with the given configuration.
+    /// Convert receiver to a string with the given formatter.
     ///- Author: Scott Brenner | SBFoundation
-    /// - Parameter configuration:A configuration for the formatter that will perform the transformation.
-    public func toString(withConfiguration configuration: DateComponentsFormatter.Configuration = .dayHourMinute) -> String? {
-        DateComponentsFormatter
-            .sharedFormatter(withConfiguration: configuration)
-            .string(from: self)
+    /// - Parameter formatter: A date components formatter that will perform the transformation.
+    public func formatted(with formatter: DateComponentsFormatter = .dayHourMinute) -> String? {
+        formatter.string(from: self)
     }
 }
 
-extension DateComponents: Comparable {
+extension DateComponents: @retroactive Comparable {
     
     public static func <(lhs: DateComponents, rhs: DateComponents) -> Bool {
         lhs.duration < rhs.duration

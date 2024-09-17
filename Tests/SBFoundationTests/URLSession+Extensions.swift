@@ -3,12 +3,13 @@ import XCTest
 
 final class URLSessionExtensionsTests: XCTestCase {
     
+    let urls = [
+        #URL(string: "https://raw.githubusercontent.com/s-brenner/performance/main/aircraft_2024_1.json"),
+        #URL(string: "https://raw.githubusercontent.com/s-brenner/performance/main/non_normal_configuration_2024_1.json"),
+    ]
+    
     @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
     func testDownload() async throws {
-        let urls = [
-            #URL(string: "https://raw.githubusercontent.com/s-brenner/performance/main/aircraft.json"),
-            #URL(string: "https://raw.githubusercontent.com/s-brenner/performance/main/non_normal_configuration.json"),
-        ]
         var progress: URLSession.CumulativeDownloadProgress?
         for try await status in URLSession.shared.download(from: urls) {
             switch status {
@@ -35,10 +36,6 @@ final class URLSessionExtensionsTests: XCTestCase {
     
     @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
     func testData() async throws {
-        let urls = [
-            #URL(string: "https://raw.githubusercontent.com/s-brenner/performance/main/aircraft.json"),
-            #URL(string: "https://raw.githubusercontent.com/s-brenner/performance/main/non_normal_configuration.json"),
-        ]
         var progress: URLSession.CumulativeDownloadProgress?
         for try await status in URLSession.shared.data(from: urls) {
             switch status {

@@ -38,7 +38,7 @@ extension Calendar {
         .map { "public static let \($0.description) = Calendar(identifier: .\($0.description))" }
 }
 
-extension Calendar.Identifier: CaseIterable {
+extension Calendar.Identifier: @retroactive CaseIterable {
     
     public static let allCases: [Calendar.Identifier] = [
         .buddhist,
@@ -60,7 +60,7 @@ extension Calendar.Identifier: CaseIterable {
     ]
 }
 
-extension Calendar.Identifier: CustomStringConvertible {
+extension Calendar.Identifier: @retroactive CustomStringConvertible {
     
     public var description: String {
         switch self {
