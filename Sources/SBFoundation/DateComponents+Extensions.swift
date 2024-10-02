@@ -60,6 +60,77 @@ extension DateComponents {
     }
 }
 
+
+
+extension Calendar.Component: @retroactive CaseIterable {
+    
+    public static let allCases: [Calendar.Component] =
+    if #available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, *) {
+        [
+            .era,
+            .year,
+            .month,
+            .day,
+            .hour,
+            .minute,
+            .second,
+            .weekday,
+            .weekdayOrdinal,
+            .quarter,
+            .weekOfMonth,
+            .weekOfYear,
+            .yearForWeekOfYear,
+            .nanosecond,
+            .calendar,
+            .timeZone,
+            .dayOfYear,
+            .isLeapMonth,
+        ]
+    }
+    else if #available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *){
+        [
+            .era,
+            .year,
+            .month,
+            .day,
+            .hour,
+            .minute,
+            .second,
+            .weekday,
+            .weekdayOrdinal,
+            .quarter,
+            .weekOfMonth,
+            .weekOfYear,
+            .yearForWeekOfYear,
+            .nanosecond,
+            .calendar,
+            .timeZone,
+            .isLeapMonth,
+        ]
+    }
+    else {
+        [
+            .era,
+            .year,
+            .month,
+            .day,
+            .hour,
+            .minute,
+            .second,
+            .weekday,
+            .weekdayOrdinal,
+            .quarter,
+            .weekOfMonth,
+            .weekOfYear,
+            .yearForWeekOfYear,
+            .nanosecond,
+            .calendar,
+            .timeZone,
+        ]
+    }
+}
+
+
 extension DateComponents: @retroactive Comparable {
     
     public static func <(lhs: DateComponents, rhs: DateComponents) -> Bool {
