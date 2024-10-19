@@ -188,6 +188,12 @@ public typealias Temperature = Measurement<UnitTemperature>
 
 ///- Author: Scott Brenner | SBFoundation
 public typealias Volume = Measurement<UnitVolume>
+
+extension UnitSpeed {
+    
+    public static let feetPerSecond = UnitSpeed(symbol: "ft/s", converter: UnitConverterLinear(coefficient: 3.2808399))
+}
+
 #endif
 
 #if canImport(SwiftUI)
