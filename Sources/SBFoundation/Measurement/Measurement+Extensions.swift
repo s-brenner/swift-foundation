@@ -191,9 +191,9 @@ public typealias Volume = Measurement<UnitVolume>
 
 extension UnitSpeed {
     
-    public static let feetPerSecond = UnitSpeed(symbol: "ft/s", converter: UnitConverterLinear(coefficient: 3.2808399))
+    public static let feetPerSecond = UnitSpeed(symbol: "ft/s", converter: UnitConverterLinear(coefficient: 0.3048))
     
-    public static let feetPerMinute = UnitSpeed(symbol: "ft/min", converter: UnitConverterLinear(coefficient: 196.8503937))
+    public static let feetPerMinute = UnitSpeed(symbol: "ft/min", converter: UnitConverterLinear(coefficient: 18.288))
 }
 
 #endif

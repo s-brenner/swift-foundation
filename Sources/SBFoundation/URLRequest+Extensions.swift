@@ -196,7 +196,13 @@ extension URLRequest.Builder {
     
     /// - Author: Scott Brenner | SBFoundation
     public enum HTTPMethod: String, CustomStringConvertible {
-        case put, post, get, delete, head
+        case put
+        case post
+        case get
+        case delete
+        case head
+        case propfind
+        case report
         
         public var description: String { rawValue.uppercased() }
     }
