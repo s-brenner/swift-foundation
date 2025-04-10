@@ -193,7 +193,7 @@ extension UnitSpeed {
     
     public static let feetPerSecond = UnitSpeed(symbol: "ft/s", converter: UnitConverterLinear(coefficient: 0.3048))
     
-    public static let feetPerMinute = UnitSpeed(symbol: "ft/min", converter: UnitConverterLinear(coefficient: 18.288))
+    public static let feetPerMinute = UnitSpeed(symbol: "ft/min", converter: UnitConverterLinear(coefficient: 0.00508))
 }
 
 #endif

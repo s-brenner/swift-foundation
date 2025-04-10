@@ -5,6 +5,7 @@ final class MeasurementTests: XCTestCase {
     
     func testSpeeds() {
         XCTAssertEqual(Speed(1, .feetPerSecond).converted(to: .metersPerSecond).value, 0.3048)
+        XCTAssertEqual(Speed(1, .feetPerSecond).converted(to: .feetPerMinute).value, 60)
     }
     
     func testInterpolate() {
