@@ -1,4 +1,4 @@
-// swift-tools-version: 6.0
+// swift-tools-version: 6.1
 
 import CompilerPluginSupport
 import PackageDescription
@@ -14,7 +14,7 @@ let package = Package(
         .package(url: "https://github.com/pointfreeco/swift-macro-testing", from: "0.0.0"),
         .package(url: "https://github.com/pointfreeco/swift-tagged", from: "0.0.0"),
         .package(url: "https://github.com/s-brenner/swift-standard-library", from: "0.0.0"),
-        .package(url: "https://github.com/swiftlang/swift-syntax", "509.0.0"..<"601.0.0-prerelease"),
+        .package(url: "https://github.com/swiftlang/swift-syntax", "600.0.0"..<"602.0.0"),
     ],
     targets: [
         .target(
