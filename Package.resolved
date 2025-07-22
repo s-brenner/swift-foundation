@@ -1,5 +1,5 @@
 {
-  "originHash" : "5b6d254ebf7f583c3e9075b2ccf0fb9f3632ae6f0cc6d3cfc70e9ed5a0f22288",
+  "originHash" : "b972e6ea0c3ee06114a6e6fed0cd51dc6363cb817fc6f1e6ef24d9890c0cf8f3",
   "pins" : [
     {
       "identity" : "swift-collections",
@@ -42,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-snapshot-testing",
       "state" : {
-        "revision" : "37230a37e83f1b7023be08e1b1a2603fcb1567fb",
-        "version" : "1.18.4"
+        "revision" : "b198a568ad24c5a22995c5ff0ecf9667634e860e",
+        "version" : "1.18.5"
       }
     },
     {
@@ -78,8 +78,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/xctest-dynamic-overlay",
       "state" : {
-        "revision" : "39de59b2d47f7ef3ca88a039dff3084688fe27f4",
-        "version" : "1.5.2"
+        "revision" : "23e3442166b5122f73f9e3e622cd1e4bafeab3b7",
+        "version" : "1.6.0"
       }
     }
   ],

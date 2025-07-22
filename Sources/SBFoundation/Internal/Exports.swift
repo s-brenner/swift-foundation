@@ -2,8 +2,8 @@
 @_exported import Foundation
 #endif
 
-#if canImport(Tagged)
-@_exported import Tagged
+#if canImport(IssueReporting)
+@_exported import IssueReporting
 #endif
 
 #if canImport(SBFoundationMacros)
@@ -12,4 +12,8 @@
 
 #if canImport(SBStandardLibrary)
 @_exported import SBStandardLibrary
+#endif
+
+#if canImport(Tagged)
+@_exported import Tagged
 #endif
