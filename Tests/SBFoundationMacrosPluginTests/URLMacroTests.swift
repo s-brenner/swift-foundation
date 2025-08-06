@@ -1,5 +1,5 @@
-import SBFoundationMacrosPlugin
 import MacroTesting
+import SBFoundationMacrosPlugin
 import XCTest
 
 final class URLMacroTests: BaseTestCase {

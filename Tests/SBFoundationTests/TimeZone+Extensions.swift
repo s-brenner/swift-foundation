@@ -23,6 +23,7 @@ final class TimeZoneExtensionsTests: XCTestCase {
         guard TimeZone.knownTimeZoneIdentifiers.count == TimeZone.allCases.count
         else {
             print(TimeZone.staticTimeZones.joined(separator: "\n\n"))
+//            print(TimeZone.allCasesBuilder.joined(separator: "\n"))
             return
         }
     }

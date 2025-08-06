@@ -181,10 +181,11 @@ extension TimeZone {
 
     public static let americaChihuahua = #TimeZone(identifier: "America/Chihuahua")
 
-    @available(macOS 10.15, *)
     public static let americaCiudadJuarez = #TimeZone(identifier: "America/Ciudad_Juarez")
 
     public static let americaCostaRica = #TimeZone(identifier: "America/Costa_Rica")
+
+    public static let americaCoyhaique = #TimeZone(identifier: "America/Coyhaique")
 
     public static let americaCreston = #TimeZone(identifier: "America/Creston")
 
@@ -984,6 +985,7 @@ extension TimeZone: @retroactive CaseIterable {
         .americaChihuahua,
         .americaCiudadJuarez,
         .americaCostaRica,
+        .americaCoyhaique,
         .americaCreston,
         .americaCuiaba,
         .americaCuracao,
@@ -1340,7 +1342,7 @@ extension TimeZone: @retroactive CaseIterable {
 #endif
 
 #if os(iOS) || os(tvOS) || os(watchOS)
-extension TimeZone: CaseIterable {
+extension TimeZone: @retroactive CaseIterable {
     
     public static let allCases: [TimeZone] = [
         .africaAbidjan,
