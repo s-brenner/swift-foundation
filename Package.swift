@@ -21,7 +21,7 @@ let package = Package(
         .package(url: "https://github.com/pointfreeco/swift-tagged", from: "0.0.0"),
         .package(url: "https://github.com/pointfreeco/xctest-dynamic-overlay", from: "1.6.0"),
         .package(url: "https://github.com/s-brenner/swift-standard-library", from: "0.0.0"),
-        .package(url: "https://github.com/swiftlang/swift-syntax", "600.0.0"..<"602.0.0"),
+        .package(url: "https://github.com/swiftlang/swift-syntax", "600.0.0"..<"603.0.0"),
     ],
     targets: [
         .target(
