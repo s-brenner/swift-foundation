@@ -6,10 +6,6 @@
 @_exported import IssueReporting
 #endif
 
-#if TimeZones && canImport(SBFoundationTimeZones)
-@_exported import SBFoundationTimeZones
-#endif
-
 #if canImport(SBStandardLibrary)
 @_exported import SBStandardLibrary
 #endif

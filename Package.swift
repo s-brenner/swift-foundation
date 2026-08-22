@@ -20,7 +20,6 @@ let package = Package(
         .trait(name: "Algorithms", description: "Import the Algorithms library"),
         .trait(name: "IssueReporting", description: "Import the IssueReporting library"),
         .trait(name: "Tagged", description: "Import the Tagged library"),
-        .trait(name: "TimeZones", description: "Import the SBFoundationTimeZones library"),
     ],
     dependencies: [
         .package(url: "https://github.com/pointfreeco/swift-macro-testing", from: "0.0.0"),
@@ -43,10 +42,6 @@ let package = Package(
                     name: "IssueReporting",
                     package: "xctest-dynamic-overlay",
                     condition: .when(traits: ["IssueReporting"])
-                ),
-                .byName(
-                    name: "SBFoundationTimeZones",
-                    condition: .when(traits: ["TimeZones"])
                 ),
                 .product(name: "SBStandardLibrary", package: "swift-standard-library"),
                 .product(
@@ -92,7 +87,7 @@ let package = Package(
         .testTarget(
             name: "SBFoundationTimeZonesTests",
             dependencies: [
-                "SBFoundationTimeZones"
+                "SBFoundationTimeZones",
             ]
         ),
     ]
