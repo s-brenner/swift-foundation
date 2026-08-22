@@ -18,6 +18,7 @@ let package = Package(
     traits: [
         .trait(name: "Algorithms", description: "Import the Algorithms library"),
         .trait(name: "IssueReporting", description: "Import the IssueReporting library"),
+        .trait(name: "SBFoundationMacros", description: "Import SBFoundationMacros"),
         .trait(name: "Tagged", description: "Import the Tagged library")
     ],
     dependencies: [

@@ -6,7 +6,7 @@
 @_exported import IssueReporting
 #endif
 
-#if canImport(SBFoundationMacros)
+#if SBFoundationMacros && canImport(SBFoundationMacros)
 @_exported import SBFoundationMacros
 #endif
 
