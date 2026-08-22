@@ -1,4 +1,4 @@
-#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
+#if SBFoundationMacros && (os(macOS) || os(iOS) || os(watchOS) || os(tvOS))
 extension HTTPURLResponse {
     
     private enum HTTPDate: String, CaseIterable {

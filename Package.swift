@@ -43,7 +43,10 @@ let package = Package(
                     package: "xctest-dynamic-overlay",
                     condition: .when(traits: ["IssueReporting"])
                 ),
-                "SBFoundationMacros",
+                .byName(
+                    name: "SBFoundationMacros",
+                    condition: .when(traits: ["SBFoundationMacros"])
+                ),
                 .product(name: "SBStandardLibrary", package: "swift-standard-library"),
                 .product(
                     name: "Tagged",
