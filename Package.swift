@@ -26,7 +26,7 @@ let package = Package(
         .package(url: "https://github.com/pointfreeco/xctest-dynamic-overlay", from: "1.6.0"),
         .package(
             url: "https://github.com/s-brenner/swift-standard-library",
-            from: "0.0.0",
+            from: "0.15.0",
             traits: [
                 .trait(name: "Algorithms", condition: .when(traits: ["Algorithms"])),
             ]
