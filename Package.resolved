@@ -1,15 +1,6 @@
 {
-  "originHash" : "52860e33c4f3a9e666b1badd137a5ebe0d914565bb08cccb03c0274436b2ce23",
+  "originHash" : "875959a2c6da117ab9dd0697142802ba1e55e4e93f8305421bf585bfb1d75d7f",
   "pins" : [
-    {
-      "identity" : "swift-algorithms",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-algorithms",
-      "state" : {
-        "revision" : "87e50f483c54e6efd60e885f7f5aa946cee68023",
-        "version" : "1.2.1"
-      }
-    },
     {
       "identity" : "swift-collections",
       "kind" : "remoteSourceControl",
@@ -47,15 +38,6 @@
       }
     },
     {
-      "identity" : "swift-numerics",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-numerics.git",
-      "state" : {
-        "revision" : "0c0290ff6b24942dadb83a929ffaaa1481df04a2",
-        "version" : "1.1.1"
-      }
-    },
-    {
       "identity" : "swift-snapshot-testing",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-snapshot-testing",
@@ -80,15 +62,6 @@
       "state" : {
         "revision" : "79e4b74a295b6eb74a8b585e3a39d29e70c1dbd1",
         "version" : "603.0.2"
-      }
-    },
-    {
-      "identity" : "swift-tagged",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/pointfreeco/swift-tagged",
-      "state" : {
-        "revision" : "3907a9438f5b57d317001dc99f3f11b46882272b",
-        "version" : "0.10.0"
       }
     },
     {

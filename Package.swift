@@ -21,13 +21,6 @@ let package = Package(
         .trait(name: "IssueReporting", description: "Import the IssueReporting library"),
         .trait(name: "Tagged", description: "Import the Tagged library"),
         .trait(name: "TimeZones", description: "Import the SBFoundationTimeZones library"),
-        .default(
-            enabledTraits: [
-                "Algorithms",
-                "IssueReporting",
-                "Tagged",
-            ]
-        ),
     ],
     dependencies: [
         .package(url: "https://github.com/pointfreeco/swift-macro-testing", from: "0.0.0"),
