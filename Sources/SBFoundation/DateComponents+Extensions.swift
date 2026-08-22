@@ -48,6 +48,7 @@ extension DateComponents {
                 return nil
             }
         case .isLeapMonth: return nil
+        case .isRepeatedDay: return nil
         @unknown default: return nil
         }
     }

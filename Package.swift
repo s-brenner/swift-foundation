@@ -14,12 +14,20 @@ let package = Package(
     products: [
         .library(name: "SBFoundation", targets: ["SBFoundation"]),
         .library(name: "SBFoundationMacros", targets: ["SBFoundationMacros"]),
+        .library(name: "SBFoundationTimeZones", targets: ["SBFoundationTimeZones"]),
     ],
     traits: [
         .trait(name: "Algorithms", description: "Import the Algorithms library"),
         .trait(name: "IssueReporting", description: "Import the IssueReporting library"),
-        .trait(name: "SBFoundationMacros", description: "Import SBFoundationMacros"),
-        .trait(name: "Tagged", description: "Import the Tagged library")
+        .trait(name: "Tagged", description: "Import the Tagged library"),
+        .trait(name: "TimeZones", description: "Import the SBFoundationTimeZones library"),
+        .default(
+            enabledTraits: [
+                "Algorithms",
+                "IssueReporting",
+                "Tagged",
+            ]
+        ),
     ],
     dependencies: [
         .package(url: "https://github.com/pointfreeco/swift-macro-testing", from: "0.0.0"),
@@ -44,8 +52,8 @@ let package = Package(
                     condition: .when(traits: ["IssueReporting"])
                 ),
                 .byName(
-                    name: "SBFoundationMacros",
-                    condition: .when(traits: ["SBFoundationMacros"])
+                    name: "SBFoundationTimeZones",
+                    condition: .when(traits: ["TimeZones"])
                 ),
                 .product(name: "SBStandardLibrary", package: "swift-standard-library"),
                 .product(
@@ -57,45 +65,42 @@ let package = Package(
         ),
         .testTarget(
             name: "SBFoundationTests",
-            dependencies: ["SBFoundation"]
+            dependencies: [
+                "SBFoundation",
+            ]
         ),
         .target(
           name: "SBFoundationMacros",
           dependencies: [
-            .byName(
-                name: "SBFoundationMacrosPlugin",
-                condition: .when(traits: ["SBFoundationMacros"])
-            ),
+            "SBFoundationMacrosPlugin",
           ]
         ),
         .macro(
           name: "SBFoundationMacrosPlugin",
           dependencies: [
-            .product(
-                name: "SwiftCompilerPlugin",
-                package: "swift-syntax",
-                condition: .when(traits: ["SBFoundationMacros"])
-            ),
-            .product(
-                name: "SwiftSyntaxMacros",
-                package: "swift-syntax",
-                condition: .when(traits: ["SBFoundationMacros"])
-            ),
+            .product(name: "SwiftCompilerPlugin", package: "swift-syntax"),
+            .product(name: "SwiftSyntaxMacros", package: "swift-syntax"),
           ]
         ),
         .testTarget(
           name: "SBFoundationMacrosPluginTests",
           dependencies: [
-            .product(
-                name: "MacroTesting",
-                package: "swift-macro-testing",
-                condition: .when(traits: ["SBFoundationMacros"])
-            ),
-            .byName(
-                name: "SBFoundationMacrosPlugin",
-                condition: .when(traits: ["SBFoundationMacros"])
-            ),
+            .product(name: "MacroTesting", package: "swift-macro-testing"),
+            "SBFoundationMacrosPlugin",
           ]
+        ),
+        .target(
+            name: "SBFoundationTimeZones",
+            dependencies: [
+                "SBFoundation",
+                "SBFoundationMacros",
+            ]
+        ),
+        .testTarget(
+            name: "SBFoundationTimeZonesTests",
+            dependencies: [
+                "SBFoundationTimeZones"
+            ]
         ),
     ]
 )

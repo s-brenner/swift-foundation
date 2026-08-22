@@ -104,12 +104,15 @@ extension Calendar.Identifier: @retroactive CustomStringConvertible {
     
     public var description: String {
         switch self {
+        case .bangla: return "bangla"
         case .buddhist: return "buddhist"
         case .chinese: return "chinese"
         case .coptic: return "coptic"
+        case .dangi: return "dangi"
         case .ethiopicAmeteAlem: return "ethiopicAmeteAlem"
         case .ethiopicAmeteMihret: return "ethiopicAmeteMihret"
         case .gregorian: return "gregorian"
+        case .gujarati: return "gujarati"
         case .hebrew: return "hebrew"
         case .indian: return "indian"
         case .islamic: return "islamic"
@@ -118,8 +121,16 @@ extension Calendar.Identifier: @retroactive CustomStringConvertible {
         case .islamicUmmAlQura: return "islamicUmmAlQura"
         case .iso8601: return "iso8601"
         case .japanese: return "japanese"
+        case .kannada: return "kannada"
+        case .malayalam: return "malayalam"
+        case .marathi: return "marathi"
+        case .odia: return "odia"
         case .persian: return "persian"
         case .republicOfChina: return "republicOfChina"
+        case .tamil: return "tamil"
+        case .telugu: return "telugu"
+        case .vikram: return "vikram"
+        case .vietnamese: return "vietnamese"
         @unknown default: return "unknown"
         }
     }

@@ -4,8 +4,8 @@ import XCTest
 final class URLSessionExtensionsTests: XCTestCase {
     
     let urls = [
-        #URL(string: "https://raw.githubusercontent.com/s-brenner/performance/main/aircraft_2024_1.json"),
-        #URL(string: "https://raw.githubusercontent.com/s-brenner/performance/main/non_normal_configuration_2024_1.json"),
+        URL(string: "https://raw.githubusercontent.com/s-brenner/performance/main/aircraft_2026_1.json")!,
+        URL(string: "https://raw.githubusercontent.com/s-brenner/performance/main/non_normal_configuration_2026_1.json")!,
     ]
     
     @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)

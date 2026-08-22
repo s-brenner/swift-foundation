@@ -6,8 +6,8 @@
 @_exported import IssueReporting
 #endif
 
-#if SBFoundationMacros && canImport(SBFoundationMacros)
-@_exported import SBFoundationMacros
+#if TimeZones && canImport(SBFoundationTimeZones)
+@_exported import SBFoundationTimeZones
 #endif
 
 #if canImport(SBStandardLibrary)

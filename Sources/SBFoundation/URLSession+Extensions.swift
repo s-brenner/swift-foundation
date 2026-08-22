@@ -106,7 +106,9 @@ extension URLSession {
     /// - Author: Scott Brenner | SBFoundation
     public func data(for requests: [URLRequest], delegate: (any URLSessionTaskDelegate)? = nil) -> AsyncDataDownloadStatus {
         AsyncDataDownloadStatus { continuation in
-            let task = Task {
+            let task = Task { [weak self] in
+                guard let self
+                else { return }
                 do {
                     let downloads = try await requests.asyncMap {
                         let (asyncBytes, urlResponse) = try await self.bytes(for: $0, delegate: delegate)
@@ -165,7 +167,9 @@ extension URLSession {
     /// - Author: Scott Brenner | SBFoundation
     public func download(for requests: [URLRequest], delegate: (any URLSessionTaskDelegate)? = nil) -> AsyncFileDownloadStatus {
         AsyncFileDownloadStatus { continuation in
-            let task = Task {
+            let task = Task { [weak self] in
+                guard let self
+                else { return }
                 do {
                     let downloads = try await requests.asyncMap {
                         let (asyncBytes, urlResponse) = try await self.bytes(for: $0, delegate: delegate)
