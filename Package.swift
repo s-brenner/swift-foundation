@@ -62,21 +62,39 @@ let package = Package(
         .target(
           name: "SBFoundationMacros",
           dependencies: [
-            "SBFoundationMacrosPlugin",
+            .byName(
+                name: "SBFoundationMacrosPlugin",
+                condition: .when(traits: ["SBFoundationMacros"])
+            ),
           ]
         ),
         .macro(
           name: "SBFoundationMacrosPlugin",
           dependencies: [
-            .product(name: "SwiftCompilerPlugin", package: "swift-syntax"),
-            .product(name: "SwiftSyntaxMacros", package: "swift-syntax"),
+            .product(
+                name: "SwiftCompilerPlugin",
+                package: "swift-syntax",
+                condition: .when(traits: ["SBFoundationMacros"])
+            ),
+            .product(
+                name: "SwiftSyntaxMacros",
+                package: "swift-syntax",
+                condition: .when(traits: ["SBFoundationMacros"])
+            ),
           ]
         ),
         .testTarget(
           name: "SBFoundationMacrosPluginTests",
           dependencies: [
-            .product(name: "MacroTesting", package: "swift-macro-testing"),
-            "SBFoundationMacrosPlugin",
+            .product(
+                name: "MacroTesting",
+                package: "swift-macro-testing",
+                condition: .when(traits: ["SBFoundationMacros"])
+            ),
+            .byName(
+                name: "SBFoundationMacrosPlugin",
+                condition: .when(traits: ["SBFoundationMacros"])
+            ),
           ]
         ),
     ]
