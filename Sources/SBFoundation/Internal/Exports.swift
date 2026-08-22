@@ -2,7 +2,7 @@
 @_exported import Foundation
 #endif
 
-#if canImport(IssueReporting)
+#if IssueReporting && canImport(IssueReporting)
 @_exported import IssueReporting
 #endif
 
@@ -14,6 +14,6 @@
 @_exported import SBStandardLibrary
 #endif
 
-#if canImport(Tagged)
+#if Tagged && canImport(Tagged)
 @_exported import Tagged
 #endif
