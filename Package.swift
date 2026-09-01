@@ -23,7 +23,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/pointfreeco/swift-issue-reporting", from: "2.0.0"),
-        .package(url: "https://github.com/pointfreeco/swift-macro-testing", from: "0.0.0"),
+//        .package(url: "https://github.com/pointfreeco/swift-macro-testing", from: "0.0.0"),
         .package(url: "https://github.com/pointfreeco/swift-tagged", from: "0.0.0"),
         .package(
             url: "https://github.com/s-brenner/swift-standard-library",
@@ -73,7 +73,7 @@ let package = Package(
         .testTarget(
           name: "SBFoundationMacrosPluginTests",
           dependencies: [
-            .product(name: "MacroTesting", package: "swift-macro-testing"),
+//            .product(name: "MacroTesting", package: "swift-macro-testing"),
             "SBFoundationMacrosPlugin",
           ]
         ),
