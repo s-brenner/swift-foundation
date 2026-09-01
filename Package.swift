@@ -22,9 +22,9 @@ let package = Package(
         .trait(name: "Tagged", description: "Import the Tagged library"),
     ],
     dependencies: [
+        .package(url: "https://github.com/pointfreeco/swift-issue-reporting", from: "2.0.0"),
         .package(url: "https://github.com/pointfreeco/swift-macro-testing", from: "0.0.0"),
         .package(url: "https://github.com/pointfreeco/swift-tagged", from: "0.0.0"),
-        .package(url: "https://github.com/pointfreeco/xctest-dynamic-overlay", from: "1.6.0"),
         .package(
             url: "https://github.com/s-brenner/swift-standard-library",
             from: "0.15.0",
@@ -40,7 +40,7 @@ let package = Package(
             dependencies: [
                 .product(
                     name: "IssueReporting",
-                    package: "xctest-dynamic-overlay",
+                    package: "swift-issue-reporting",
                     condition: .when(traits: ["IssueReporting"])
                 ),
                 .product(name: "SBStandardLibrary", package: "swift-standard-library"),
